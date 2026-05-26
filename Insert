@@ -1,0 +1,192 @@
+/* INSERT ALL */
+INTO cardapio (id_cardapio, descricao, data_atualizacao) VALUES (1, 'Tradicionais da Familia - Pizzas salgadas', TO_DATE('2026-05-20', 'YYYY-MM-DD')) 
+INTO cardapio (id_cardapio, descricao, data_atualizacao) VALUES (2, 'Pizzas Especiais - Pizzas Salgadas', TO_DATE('2026-05-20', 'YYYY-MM-DD'))
+INTO cardapio (id_cardapio, descricao, data_atualizacao) VALUES (3, 'Pizzas Doces', TO_DATE('2026-05-20', 'YYYY-MM-DD')) 
+INTO cardapio (id_cardapio, descricao, data_atualizacao) VALUES (4, 'Bebidas', TO_DATE('2026-05-20', 'YYYY-MM-DD'))
+SELECT * FROM dual;
+
+/* INSERT ALL */
+    INTO cliente (id_cliente, cpf, nome, telefone, email, rua, numero, cep) VALUES (1, '12345678900', 'João Silva', '11999991111', 'joao@email.com', 'Av. Paulista', 1010, '07783018')
+    INTO cliente (id_cliente, cpf, nome, telefone, email, rua, numero, cep) VALUES (2, '98765432100', 'Maria Souza', '11988882222', 'maria@email.com', 'Rua das Flores', 45, '01234567')
+    INTO cliente (id_cliente, cpf, nome, telefone, email, rua, numero, cep) VALUES (3, '11122233344', 'Carlos Oliveira', '11977773333', 'carlos@email.com', 'Alameda Santos', 820, '01419001')
+    INTO cliente (id_cliente, cpf, nome, telefone, email, rua, numero, cep) VALUES (4, '44455566677', 'Ana Beatriz', '11966664444', 'ana@email.com', 'Rua Augusta', 1500, '01305100')
+    INTO cliente (id_cliente, cpf, nome, telefone, email, rua, numero, cep) VALUES (5, '77788899911', 'Pedro Henrique', '11955555555', 'pedro@email.com', 'Rua Consolação', 2400, '01301000')
+    INTO cliente (id_cliente, cpf, nome, telefone, email, rua, numero, cep) VALUES (6, '22233344455', 'Julia Costa', '11944446666', 'julia@email.com', 'Av. Brigadeiro', 500, '01311000')
+    INTO cliente (id_cliente, cpf, nome, telefone, email, rua, numero, cep) VALUES (7, '55566677788', 'Lucas Martins', '11933337777', 'lucas@email.com', 'Rua Frei Caneca', 360, '01307001')
+SELECT * FROM dual;
+
+
+/* INSERT ALL */
+    INTO pedido (ID_Pedido, tipo, status, horario_pedido, data_pedido, valor_total) VALUES (101, 'app', 'entregue', TO_TIMESTAMP('18:30:00', 'HH24:MI:SS'), TO_DATE('21/05/2026', 'DD/MM/YYYY'), 118.60) 
+    INTO pedido (ID_Pedido, tipo, status, horario_pedido, data_pedido, valor_total) VALUES (102, 'telefone', 'entregue', TO_TIMESTAMP('19:15:00', 'HH24:MI:SS'), TO_DATE('21/05/2026', 'DD/MM/YYYY'), 118.60)
+    INTO pedido (ID_Pedido, tipo, status, horario_pedido, data_pedido, valor_total) VALUES (103, 'site', 'em preparo', TO_TIMESTAMP('19:45:00', 'HH24:MI:SS'), TO_DATE('21/05/2026', 'DD/MM/YYYY'), 118.60)
+    INTO pedido (ID_Pedido, tipo, status, horario_pedido, data_pedido, valor_total) VALUES (104, 'app', 'recebido', TO_TIMESTAMP('20:00:00', 'HH24:MI:SS'), TO_DATE('21/05/2026', 'DD/MM/YYYY'), 118.60)
+    INTO pedido (ID_Pedido, tipo, status, horario_pedido, data_pedido, valor_total) VALUES (105, 'telefone', 'entregue', TO_TIMESTAMP('20:15:00', 'HH24:MI:SS'), TO_DATE('21/05/2026', 'DD/MM/YYYY'), 119.60)
+    INTO pedido (ID_Pedido, tipo, status, horario_pedido, data_pedido, valor_total) VALUES (106, 'app', 'em preparo', TO_TIMESTAMP('20:30:00', 'HH24:MI:SS'), TO_DATE('21/05/2026', 'DD/MM/YYYY'), 119.60)
+    INTO pedido (ID_Pedido, tipo, status, horario_pedido, data_pedido, valor_total) VALUES (107, 'site', 'recebido', TO_TIMESTAMP('20:45:00', 'HH24:MI:SS'), TO_DATE('21/05/2026', 'DD/MM/YYYY'), 118.60)
+SELECT * FROM dual;
+
+/* INSERT ALL */
+    INTO consulta (FK_ID_Cardapio, FK_ID_Cliente) VALUES (1, 1) 
+    INTO consulta (FK_ID_Cardapio, FK_ID_Cliente) VALUES (1, 2) 
+    INTO consulta (FK_ID_Cardapio, FK_ID_Cliente) VALUES (3, 3) 
+    INTO consulta (FK_ID_Cardapio, FK_ID_Cliente) VALUES (2, 4) 
+    INTO consulta (FK_ID_Cardapio, FK_ID_Cliente) VALUES (3, 5) 
+    INTO consulta (FK_ID_Cardapio, FK_ID_Cliente) VALUES (4, 6) 
+    INTO consulta (FK_ID_Cardapio, FK_ID_Cliente) VALUES (4, 7) 
+SELECT * FROM dual;
+
+/* INSERT ALL */
+    INTO faz(FK_ID_CLIENTE, FK_ID_PEDIDO) VALUES (1, 101)
+    INTO faz(FK_ID_CLIENTE, FK_ID_PEDIDO) VALUES (2, 102)
+    INTO faz(FK_ID_CLIENTE, FK_ID_PEDIDO) VALUES (3, 103)
+    INTO faz(FK_ID_CLIENTE, FK_ID_PEDIDO) VALUES (4, 104)
+    INTO faz(FK_ID_CLIENTE, FK_ID_PEDIDO) VALUES (5, 105)
+    INTO faz(FK_ID_CLIENTE, FK_ID_PEDIDO) VALUES (6, 106)
+    INTO faz(FK_ID_CLIENTE, FK_ID_PEDIDO) VALUES (7, 107)
+SELECT * FROM dual;
+
+INSERT ALL
+    -- Cardápio 1 - Tradicionais da Família (R$29,90)
+    INTO pizza (id_pizza, tipo, nome, tamanho, preco, tempo_preparo) VALUES (1,  'salgada', 'Mussarela', 'Grande', 29.90, TO_TIMESTAMP('00:25:00', 'HH24:MI:SS'))
+    INTO pizza (id_pizza, tipo, nome, tamanho, preco, tempo_preparo) VALUES (2,  'salgada', 'Calabresa', 'Grande', 29.90, TO_TIMESTAMP('00:26:00', 'HH24:MI:SS'))
+    INTO pizza (id_pizza, tipo, nome, tamanho, preco, tempo_preparo) VALUES (3,  'salgada', 'Bauru', 'Grande', 29.90, TO_TIMESTAMP('00:27:00', 'HH24:MI:SS'))
+    INTO pizza (id_pizza, tipo, nome, tamanho, preco, tempo_preparo) VALUES (4,  'salgada', 'Frango com Catupiry', 'Grande', 29.90, TO_TIMESTAMP('00:28:00', 'HH24:MI:SS'))
+    INTO pizza (id_pizza, tipo, nome, tamanho, preco, tempo_preparo) VALUES (5,  'salgada', 'Toscana', 'Grande', 29.90, TO_TIMESTAMP('00:29:00', 'HH24:MI:SS'))
+    INTO pizza (id_pizza, tipo, nome, tamanho, preco, tempo_preparo) VALUES (6,  'salgada', 'Baiana', 'Grande', 29.90, TO_TIMESTAMP('00:24:00', 'HH24:MI:SS'))
+    INTO pizza (id_pizza, tipo, nome, tamanho, preco, tempo_preparo) VALUES (7,  'salgada', 'Portuguesa', 'Grande', 29.90, TO_TIMESTAMP('00:26:00', 'HH24:MI:SS'))
+
+    -- Cardápio 2 - Pizzas Especiais (R$39,90)
+    INTO pizza (id_pizza, tipo, nome, tamanho, preco, tempo_preparo) VALUES (8,  'salgada', '4 Queijos', 'Grande', 39.90, TO_TIMESTAMP('00:30:00', 'HH24:MI:SS'))
+    INTO pizza (id_pizza, tipo, nome, tamanho, preco, tempo_preparo) VALUES (9,  'salgada', 'Moda da Casa', 'Grande', 39.90, TO_TIMESTAMP('00:31:00', 'HH24:MI:SS'))
+    INTO pizza (id_pizza, tipo, nome, tamanho, preco, tempo_preparo) VALUES (10, 'salgada', 'Brócolis', 'Grande', 39.90, TO_TIMESTAMP('00:32:00', 'HH24:MI:SS'))
+    INTO pizza (id_pizza, tipo, nome, tamanho, preco, tempo_preparo) VALUES (11, 'salgada', 'Bacon', 'Grande', 39.90, TO_TIMESTAMP('00:33:00', 'HH24:MI:SS'))
+    INTO pizza (id_pizza, tipo, nome, tamanho, preco, tempo_preparo) VALUES (12, 'salgada', 'Milho', 'Grande', 39.90, TO_TIMESTAMP('00:34:00', 'HH24:MI:SS'))
+    INTO pizza (id_pizza, tipo, nome, tamanho, preco, tempo_preparo) VALUES (13, 'salgada', 'Atum', 'Grande', 39.90, TO_TIMESTAMP('00:35:00', 'HH24:MI:SS'))
+    INTO pizza (id_pizza, tipo, nome, tamanho, preco, tempo_preparo) VALUES (14, 'salgada', 'Pepperoni', 'Grande', 39.90, TO_TIMESTAMP('00:36:00', 'HH24:MI:SS'))
+
+    -- Cardápio 3 - Pizzas Doces (R$44,90)
+    INTO pizza (id_pizza, tipo, nome, tamanho, preco, tempo_preparo) VALUES (15, 'doce', 'Brigadeiro', 'Grande', 44.90, TO_TIMESTAMP('00:20:00', 'HH24:MI:SS'))
+    INTO pizza (id_pizza, tipo, nome, tamanho, preco, tempo_preparo) VALUES (16, 'doce', 'Chocolate c/ Morango', 'Grande', 44.90, TO_TIMESTAMP('00:21:00', 'HH24:MI:SS'))
+    INTO pizza (id_pizza, tipo, nome, tamanho, preco, tempo_preparo) VALUES (17, 'doce', 'Romeu e Julieta', 'Grande', 44.90, TO_TIMESTAMP('00:20:00', 'HH24:MI:SS'))
+    INTO pizza (id_pizza, tipo, nome, tamanho, preco, tempo_preparo) VALUES (18, 'doce', 'Banana com Canela', 'Grande', 44.90, TO_TIMESTAMP('00:22:00', 'HH24:MI:SS'))
+SELECT * FROM dual;
+
+INSERT ALL
+    -- Pedido 101 - João Silva (Calabresa + 4 Queijos + Brigadeiro + Coca-Cola)
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (1,  1, 29.90)
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (2,  1, 39.90)
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (3,  1, 44.90)
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (4,  1,  3.90)
+
+    -- Pedido 102 - Maria Souza
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (5,  1, 29.90)
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (6,  1, 39.90)
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (7,  1, 44.90)
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (8,  1,  3.90)
+
+    -- Pedido 103 - Carlos Oliveira
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (9,  1, 29.90)
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (10, 1, 39.90)
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (11, 1, 44.90)
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (12, 1,  3.90)
+
+    -- Pedido 104 - Ana Beatriz
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (13, 1, 29.90)
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (14, 1, 39.90)
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (15, 1, 44.90)
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (16, 1,  3.90)
+
+    -- Pedido 105 - Pedro Henrique
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (17, 1, 29.90)
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (18, 1, 39.90)
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (19, 1, 44.90)
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (20, 1,  4.90)
+
+    -- Pedido 106 - Julia Costa
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (21, 1, 29.90)
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (22, 1, 39.90)
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (23, 1, 44.90)
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (24, 1,  4.90)
+
+    -- Pedido 107 - Lucas Martins
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (25, 1, 29.90)
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (26, 1, 39.90)
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (27, 1, 44.90)
+    INTO item_pedido (id_item_pedido, quantidade, subtotal) VALUES (28, 1,  3.90)
+SELECT * FROM dual;
+
+INSERT ALL
+    -- Pedido 101 - João Silva
+    INTO contem (FK_ID_Pedido, FK_ID_Item_Pedido) VALUES (101, 1)
+    INTO contem (FK_ID_Pedido, FK_ID_Item_Pedido) VALUES (101, 2)
+    INTO contem (FK_ID_Pedido, FK_ID_Item_Pedido) VALUES (101, 3)
+    INTO contem (FK_ID_Pedido, FK_ID_Item_Pedido) VALUES (101, 4)
+
+    -- Pedido 102 - Maria Souza
+    INTO contem (FK_ID_Pedido, FK_ID_Item_Pedido) VALUES (102, 5)
+    INTO contem (FK_ID_Pedido, FK_ID_Item_Pedido) VALUES (102, 6)
+    INTO contem (FK_ID_Pedido, FK_ID_Item_Pedido) VALUES (102, 7)
+    INTO contem (FK_ID_Pedido, FK_ID_Item_Pedido) VALUES (102, 8)
+
+SELECT * FROM dual;
+
+INSERT ALL
+    INTO possui_bebida (FK_ID_Bebida, FK_ID_Item_Pedido) VALUES (1, 4)
+    INTO possui_bebida (FK_ID_Bebida, FK_ID_Item_Pedido) VALUES (2, 8)
+    INTO possui_bebida (FK_ID_Bebida, FK_ID_Item_Pedido) VALUES (3, 12)
+    INTO possui_bebida (FK_ID_Bebida, FK_ID_Item_Pedido) VALUES (4, 16)
+    INTO possui_bebida (FK_ID_Bebida, FK_ID_Item_Pedido) VALUES (5, 20)
+    INTO possui_bebida (FK_ID_Bebida, FK_ID_Item_Pedido) VALUES (6, 24)
+    INTO possui_bebida (FK_ID_Bebida, FK_ID_Item_Pedido) VALUES (1, 28)
+SELECT * FROM dual;
+
+INSERT ALL
+    INTO entrega (id_entrega, endereco_entrega, status_entrega, tipo_entrega, horario_saida, horario_chegada, data_entrega) VALUES (1, 'Av. Paulista, 1010', 'entregue', 'delivery', TO_TIMESTAMP('18:45:00', 'HH24:MI:SS'), TO_TIMESTAMP('19:10:00', 'HH24:MI:SS'), TO_DATE('21/05/2026', 'DD/MM/YYYY'))
+    INTO entrega (id_entrega, endereco_entrega, status_entrega, tipo_entrega, horario_saida, horario_chegada, data_entrega) VALUES (2, 'Rua das Flores, 45', 'entregue', 'delivery', TO_TIMESTAMP('19:30:00', 'HH24:MI:SS'), TO_TIMESTAMP('19:55:00', 'HH24:MI:SS'), TO_DATE('21/05/2026', 'DD/MM/YYYY'))
+    INTO entrega (id_entrega, endereco_entrega, status_entrega, tipo_entrega, horario_saida, horario_chegada, data_entrega) VALUES (3, 'Alameda Santos, 820', 'em andamento', 'delivery', TO_TIMESTAMP('20:00:00', 'HH24:MI:SS'), TO_TIMESTAMP('20:25:00', 'HH24:MI:SS'), TO_DATE('21/05/2026', 'DD/MM/YYYY'))
+    INTO entrega (id_entrega, endereco_entrega, status_entrega, tipo_entrega, horario_saida, horario_chegada, data_entrega) VALUES (4, 'Rua Augusta, 1500', 'pendente', 'retirada', TO_TIMESTAMP('20:15:00', 'HH24:MI:SS'), TO_TIMESTAMP('20:40:00', 'HH24:MI:SS'), TO_DATE('21/05/2026', 'DD/MM/YYYY'))
+    INTO entrega (id_entrega, endereco_entrega, status_entrega, tipo_entrega, horario_saida, horario_chegada, data_entrega) VALUES (5, 'Rua Consolação, 2400', 'entregue', 'delivery', TO_TIMESTAMP('20:30:00', 'HH24:MI:SS'), TO_TIMESTAMP('20:55:00', 'HH24:MI:SS'), TO_DATE('21/05/2026', 'DD/MM/YYYY'))
+    INTO entrega (id_entrega, endereco_entrega, status_entrega, tipo_entrega, horario_saida, horario_chegada, data_entrega) VALUES (6, 'Av. Brigadeiro, 500', 'em andamento', 'delivery', TO_TIMESTAMP('20:45:00', 'HH24:MI:SS'), TO_TIMESTAMP('21:10:00', 'HH24:MI:SS'), TO_DATE('21/05/2026', 'DD/MM/YYYY'))
+    INTO entrega (id_entrega, endereco_entrega, status_entrega, tipo_entrega, horario_saida, horario_chegada, data_entrega) VALUES (7, 'Rua Frei Caneca, 360', 'pendente', 'retirada', TO_TIMESTAMP('21:00:00', 'HH24:MI:SS'), TO_TIMESTAMP('21:25:00', 'HH24:MI:SS'), TO_DATE('21/05/2026', 'DD/MM/YYYY'))
+SELECT * FROM dual;
+
+INSERT ALL
+    INTO gera (FK_ID_Pedido, FK_ID_Entrega) VALUES (101, 1)
+    INTO gera (FK_ID_Pedido, FK_ID_Entrega) VALUES (102, 2)
+    INTO gera (FK_ID_Pedido, FK_ID_Entrega) VALUES (103, 3)
+    INTO gera (FK_ID_Pedido, FK_ID_Entrega) VALUES (104, 4)
+    INTO gera (FK_ID_Pedido, FK_ID_Entrega) VALUES (105, 5)
+    INTO gera (FK_ID_Pedido, FK_ID_Entrega) VALUES (106, 6)
+    INTO gera (FK_ID_Pedido, FK_ID_Entrega) VALUES (107, 7)
+SELECT * FROM dual;
+
+INSERT ALL
+    INTO tem_pagamento (FK_ID_Pagamento, FK_ID_Entrega) VALUES (1, 1)
+    INTO tem_pagamento (FK_ID_Pagamento, FK_ID_Entrega) VALUES (2, 2)
+    INTO tem_pagamento (FK_ID_Pagamento, FK_ID_Entrega) VALUES (3, 3)
+    INTO tem_pagamento (FK_ID_Pagamento, FK_ID_Entrega) VALUES (4, 4)
+    INTO tem_pagamento (FK_ID_Pagamento, FK_ID_Entrega) VALUES (5, 5)
+    INTO tem_pagamento (FK_ID_Pagamento, FK_ID_Entrega) VALUES (6, 6)
+    INTO tem_pagamento (FK_ID_Pagamento, FK_ID_Entrega) VALUES (7, 7)
+SELECT * FROM dual;
+
+INSERT ALL
+    INTO pagamento (id_pagamento, tipo_pagamento, valor, status, data_pagamento) VALUES (1, 'dinheiro', 118.60, 'pendente', TO_DATE('21/05/2026', 'DD/MM/YYYY'))
+    INTO pagamento (id_pagamento, tipo_pagamento, valor, status, data_pagamento) VALUES (2, 'pix', 118.60, 'aprovado', TO_DATE('21/05/2026', 'DD/MM/YYYY'))
+    INTO pagamento (id_pagamento, tipo_pagamento, valor, status, data_pagamento) VALUES (3, 'cartao', 118.60, 'recusado', TO_DATE('21/05/2026', 'DD/MM/YYYY'))
+    INTO pagamento (id_pagamento, tipo_pagamento, valor, status, data_pagamento) VALUES (4, 'dinheiro', 118.60, 'pendente', TO_DATE('21/05/2026', 'DD/MM/YYYY'))
+    INTO pagamento (id_pagamento, tipo_pagamento, valor, status, data_pagamento) VALUES (5, 'pix', 119.60, 'aprovado', TO_DATE('21/05/2026', 'DD/MM/YYYY'))
+    INTO pagamento (id_pagamento, tipo_pagamento, valor, status, data_pagamento) VALUES (6, 'cartao', 119.60, 'recusado', TO_DATE('21/05/2026', 'DD/MM/YYYY'))
+    INTO pagamento (id_pagamento, tipo_pagamento, valor, status, data_pagamento) VALUES (7, 'dinheiro', 118.60, 'pendente', TO_DATE('21/05/2026', 'DD/MM/YYYY'))
+SELECT * FROM dual;
+
+INSERT ALL
+    INTO efetua (FK_ID_Cliente, FK_ID_Pagamento) VALUES (1, 1)
+    INTO efetua (FK_ID_Cliente, FK_ID_Pagamento) VALUES (2, 2)
+    INTO efetua (FK_ID_Cliente, FK_ID_Pagamento) VALUES (3, 3)
+    INTO efetua (FK_ID_Cliente, FK_ID_Pagamento) VALUES (4, 4)
+    INTO efetua (FK_ID_Cliente, FK_ID_Pagamento) VALUES (5, 5)
+    INTO efetua (FK_ID_Cliente, FK_ID_Pagamento) VALUES (6, 6)
+    INTO efetua (FK_ID_Cliente, FK_ID_Pagamento) VALUES (7, 7)
+SELECT * FROM dual;
