@@ -1,0 +1,235 @@
+/* --Criar a tabela cardapio*/
+CREATE TABLE cardapio(
+    ID INT NOT NULL,
+    Descricao VARCHAR(100) NOT NULL,
+    Data_atualizacao DATE,
+    PRIMARY KEY(ID)
+);
+
+ALTER TABLE cardapio RENAME COLUMN id TO id_cardapio;
+DESCRIBE CARDAPIO;
+
+/* --Criar a tabela Cliente*/
+CREATE TABLE cliente(
+    ID INT NOT NULL,
+    Cpf CHAR(11) UNIQUE,
+    Nome VARCHAR(100) NOT NULL,
+    Telefone VARCHAR(20) NOT NULL,
+    Email VARCHAR(100),
+    Rua VARCHAR(100) NOT NULL,
+    Numero INT NOT NULL,
+    Cep CHAR(8) NOT NULL,
+    PRIMARY KEY(ID)
+)
+
+ALTER TABLE cliente RENAME COLUMN id TO id_cliente;
+DESCRIBE CLIENTE;
+
+/* --Criar tabela pedido*/
+CREATE TABLE pedido(
+    ID INT NOT NULL,
+    Tipo VARCHAR(20) NOT NULL,
+    Status VARCHAR(30) NOT NULL,
+    Horario_pedido TIMESTAMP NOT NULL,
+    Data_pedido DATE NOT NULL,
+    Valor_total NUMBER(6,2) NOT NULL,
+    PRIMARY KEY(ID),
+    CONSTRAINT CHK_TIPO_PEDIDO CHECK (TIPO IN ('telefone', 'app', 'site')),
+    CONSTRAINT CHK_STATUS_PEDIDO CHECK (STATUS IN ('recebido', 'em preparo', 'entregue'))
+);
+
+ALTER TABLE pedido RENAME COLUMN id TO id_pedido;
+DESCRIBE PEDIDO;
+
+/* --Criar uma tabela de relacao(colsulta) para (cardapio,cliente) */
+CREATE TABLE consulta (
+    FK_ID_Cardapio INT NOT NULL,
+    FK_ID_Cliente  INT NOT NULL,
+    CONSTRAINT pk_consulta PRIMARY KEY (FK_ID_Cardapio, FK_ID_Cliente),
+    CONSTRAINT fk_consulta_cardapio FOREIGN KEY (FK_ID_Cardapio) REFERENCES cardapio(id_cardapio),
+    CONSTRAINT fk_consulta_cliente  FOREIGN KEY (FK_ID_Cliente)  REFERENCES cliente(id_cliente)
+);
+
+DESCRIBE CONSULTA;
+
+/* --Criar uma tabela de relacao(faz) para (cliente,pedido)*/
+CREATE TABLE faz(
+    FK_ID_Cliente INT NOT NULL,
+    FK_ID_Pedido INT NOT NULL,
+    CONSTRAINT pk_faz PRIMARY KEY (FK_ID_Cliente, FK_ID_Pedido),
+    CONSTRAINT fk_faz_cliente FOREIGN KEY (FK_ID_Cliente) REFERENCES cliente(id_cliente),
+    CONSTRAINT fk_faz_pedido FOREIGN KEY (FK_ID_Pedido) REFERENCES pedido(id_pedido)
+);
+
+DESCRIBE FAZ;
+
+--Criar a tabela Pizza
+CREATE TABLE pizza(
+    ID INT NOT NULL,
+    Tipo VARCHAR(20) NOT NULL,
+    Nome VARCHAR(100) NOT NULL,
+    Tamanho VARCHAR(20) NOT NULL,
+    Preco NUMBER(6,2) NOT NULL,
+    Tempo_preparo TIMESTAMP NOT NULL,
+    PRIMARY KEY(ID),
+    CONSTRAINT CHK_TIPO_PIZZA CHECK (Tipo IN ('doce', 'salgada'))
+);
+
+ALTER TABLE pizza RENAME COLUMN id TO id_pizza;
+DESCRIBE PIZZA;
+
+--Criar a tabela Item_pedido
+CREATE TABLE item_pedido(
+    ID INT NOT NULL,
+    Quantidade INT NOT NULL,
+    Subtotal NUMBER(6,2) NOT NULL,
+    PRIMARY KEY(ID)
+);
+
+ALTER TABLE item_pedido RENAME COLUMN id TO id_item_pedido;
+DESCRIBE ITEM_PEDIDO;
+
+--Criar uma tabela de relacao(contem) para (pedido,item_pedido)
+CREATE TABLE contem(
+    FK_ID_Pedido INT NOT NULL,
+    FK_ID_Item_Pedido INT NOT NULL,
+    CONSTRAINT pk_contem PRIMARY KEY (FK_ID_Pedido, FK_ID_Item_Pedido),
+    CONSTRAINT fk_contem_pedido FOREIGN KEY (FK_ID_Pedido) REFERENCES pedido(id_pedido),
+    CONSTRAINT fk_contem_item_pedido FOREIGN KEY (FK_ID_Item_Pedido) REFERENCES item_pedido(id_item_pedido)
+);
+
+DESCRIBE CONTEM;
+
+--Criar uma tabela de relação (possui) para (pizza,item_pedido)
+CREATE TABLE possui(
+    FK_ID_Pizza INT NOT NULL,
+    FK_ID_Item_Pedido INT NOT NULL,
+    CONSTRAINT pk_possui PRIMARY KEY (FK_ID_Pizza, FK_ID_Item_Pedido),
+    CONSTRAINT fk_possui_pizza FOREIGN KEY (FK_ID_Pizza) REFERENCES pizza(id_pizza),
+    CONSTRAINT fk_possui_item FOREIGN KEY (FK_ID_Item_Pedido) REFERENCES item_pedido(id_item_pedido)
+);
+
+DESCRIBE POSSUI;
+
+--Criar uma tabela relacao(possui_bebida) para (bebida,item_pedido)
+CREATE TABLE possui_bebida(
+    FK_ID_Bebida INT NOT NULL,
+    FK_ID_Item_Pedido INT NOT NULL,
+    CONSTRAINT pk_possui_bebida PRIMARY KEY (FK_ID_Bebida, FK_ID_Item_Pedido),
+    CONSTRAINT fk_possui_bebida_bebida FOREIGN KEY (FK_ID_Bebida) REFERENCES bebida(id_bebida),
+    CONSTRAINT fk_possui_bebida_item FOREIGN KEY (FK_ID_Item_Pedido) REFERENCES item_pedido(id_item_pedido)
+);
+
+DESCRIBE POSSUI_BEBIDA;
+
+--Criar a tabela bebida
+CREATE TABLE bebida(
+    ID INT NOT NULL,
+    Nome VARCHAR(100) NOT NULL,
+    Preco NUMBER(6,2) NOT NULL,
+    Tamanho VARCHAR(20) NOT NULL,
+    Marca VARCHAR(100) NOT NULL,
+    PRIMARY KEY(ID)
+);
+
+ALTER TABLE bebida RENAME COLUMN id TO id_bebida;
+
+--Criar uma tabela relacao(tem) para (pizza,ingrediente)
+CREATE TABLE tem(
+    FK_ID_Pizza INT NOT NULL,
+    FK_ID_Ingrediente INT NOT NULL,
+    CONSTRAINT pk_tem PRIMARY KEY (FK_ID_Pizza, FK_ID_Ingrediente),
+    CONSTRAINT fk_tem_pizza FOREIGN KEY (FK_ID_Pizza) REFERENCES pizza(id_pizza),
+    CONSTRAINT fk_tem_ingrediente FOREIGN KEY (FK_ID_Ingrediente) REFERENCES ingrediente(id_ingrediente)
+);
+
+--Criar a tabela ingrediente
+CREATE TABLE ingrediente(
+    ID INT NOT NULL,
+    Nome VARCHAR(100) NOT NULL,
+    Descricao VARCHAR(200),
+    Data_validade DATE NOT NULL,
+    Quantidade_estoque INT NOT NULL,
+    PRIMARY KEY(ID)
+);
+
+ALTER TABLE ingrediente RENAME COLUMN id TO id_ingrediente;
+
+--Criar uma tabela relacao(registra) para (pedido,funcionario)
+CREATE TABLE registra(
+    FK_ID_Pedido INT NOT NULL,
+    FK_ID_Funcionario INT NOT NULL,
+    CONSTRAINT pk_registra PRIMARY KEY (FK_ID_Pedido, FK_ID_Funcionario),
+    CONSTRAINT fk_registra_pedido FOREIGN KEY (FK_ID_Pedido) REFERENCES pedido(id_pedido),
+    CONSTRAINT fk_registra_funcionario FOREIGN KEY (FK_ID_Funcionario) REFERENCES funcionario(id_funcionario)
+);
+
+--Criar a tabela funcionario
+CREATE TABLE funcionario(
+    ID INT NOT NULL,
+    Nome VARCHAR(100) NOT NULL,
+    Telefone VARCHAR(20) NOT NULL,
+    Cargo VARCHAR(50) NOT NULL,
+    Salario NUMBER(8,2) NOT NULL,
+    Data_admissao DATE NOT NULL,
+    PRIMARY KEY(ID)
+);
+
+ALTER TABLE funcionario RENAME COLUMN id TO id_funcionario
+
+--Criar a tabela entrega
+CREATE TABLE entrega(
+    ID INT NOT NULL,
+    Endereco_entrega VARCHAR(200) NOT NULL,
+    Status_entrega VARCHAR(20) NOT NULL,
+    Tipo_entrega VARCHAR(20) NOT NULL,
+    Horario_saida TIMESTAMP NOT NULL,
+    Horario_chegada TIMESTAMP NOT NULL,
+    Data_entrega DATE NOT NULL,
+    PRIMARY KEY(ID),
+    CONSTRAINT CHK_STATUS_ENTREGA CHECK (Status_entrega IN ('pendente', 'em andamento', 'entregue')),
+    CONSTRAINT CHK_TIPO_ENTREGA CHECK (Tipo_entrega IN ('delivery', 'retirada'))
+);
+
+ALTER TABLE entrega RENAME COLUMN id TO id_entrega;
+
+--Criar uma tabela relacao(gera) para (pedido,entrega)
+CREATE TABLE gera(
+    FK_ID_Pedido INT NOT NULL,
+    FK_ID_Entrega INT NOT NULL,
+    CONSTRAINT pk_gera PRIMARY KEY (FK_ID_Pedido, FK_ID_Entrega),
+    CONSTRAINT fk_gera_pedido FOREIGN KEY (FK_ID_Pedido) REFERENCES pedido(id_pedido),
+    CONSTRAINT fk_gera_entrega FOREIGN KEY (FK_ID_Entrega) REFERENCES entrega(id_entrega)
+);
+
+--Criar uma tabela relacao(tem_pagamento) para (pagamento,entrega)
+CREATE TABLE tem_pagamento(
+    FK_ID_Pagamento INT NOT NULL,
+    FK_ID_Entrega INT NOT NULL,
+    CONSTRAINT pk_tem_pagamento PRIMARY KEY (FK_ID_Pagamento, FK_ID_Entrega),
+    CONSTRAINT fk_tem_pagamento FOREIGN KEY (FK_ID_Pagamento) REFERENCES pagamento(id_pagamento),
+    CONSTRAINT fk_tem_entrega FOREIGN KEY (FK_ID_Entrega) REFERENCES entrega(id_entrega)
+);
+
+--Criar a tabela pagamento 
+CREATE TABLE pagamento(
+    ID INT NOT NULL,
+    Tipo_pagamento VARCHAR(20) NOT NULL,
+    Valor NUMBER(8,2) NOT NULL,
+    Status VARCHAR(20) NOT NULL,
+    Data_pagamento DATE NOT NULL,
+    PRIMARY KEY(ID),
+    CONSTRAINT CHK_TIPO_PAGAMENTO CHECK (Tipo_pagamento IN ('dinheiro', 'pix', 'cartao')),
+    CONSTRAINT CHK_STATUS_PAGAMENTO CHECK (Status IN ('pendente', 'aprovado', 'recusado'))
+);
+
+ALTER TABLE pagamento RENAME COLUMN id TO id_pagamento;
+
+--Criar uma tabela relacao(efetua) para (cliente,pagamento)
+CREATE TABLE efetua(
+    FK_ID_Cliente INT NOT NULL,
+    FK_ID_Pagamento INT NOT NULL,
+    CONSTRAINT pk_efetua PRIMARY KEY (FK_ID_Cliente, FK_ID_Pagamento),
+    CONSTRAINT fk_efetua_cliente FOREIGN KEY (FK_ID_Cliente) REFERENCES cliente(id_cliente),
+    CONSTRAINT fk_efetua_pagamento FOREIGN KEY (FK_ID_Pagamento) REFERENCES pagamento(id_pagamento)
+);
